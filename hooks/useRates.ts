@@ -1,18 +1,18 @@
-import { useState, useEffect }     from 'react'
-import { doc, onSnapshot }         from 'firebase/firestore'
-import { db }                      from '@/lib/firebase'
-import type { MetalRates }         from '@/types'
+import { useState, useEffect } from 'react'
+import type { MetalRates } from '@/types'
+import { mockRates } from '@/lib/firebase'
 
 export function useRates() {
-  const [rates,   setRates]   = useState<MetalRates | null>(null)
+  const [rates, setRates] = useState<MetalRates | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const unsub = onSnapshot(doc(db, 'settings', 'metalRates'), snap => {
-      if (snap.exists()) setRates({ id: snap.id, ...snap.data() } as MetalRates)
+    const timer = setTimeout(() => {
+      setRates(mockRates as MetalRates)
       setLoading(false)
-    })
-    return unsub
+    }, 500)
+
+    return () => clearTimeout(timer)
   }, [])
 
   return { rates, loading }

@@ -3,7 +3,7 @@
 import { TrendingUp, TrendingDown } from 'lucide-react'
 import type { MetalRates }          from '@/types'
 
-interface Props { rates: MetalRates | null }
+interface Props { rates: any }
 
 export default function RatesTicker({ rates }: Props) {
   if (!rates) return (

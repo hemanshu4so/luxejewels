@@ -1,30 +1,19 @@
-import { useState, useEffect }       from 'react'
-import { collection, onSnapshot,
-         query, orderBy }            from 'firebase/firestore'
-import { db }                        from '@/lib/firebase'
-import type { Product }              from '@/types'
+import { useState, useEffect } from 'react'
+import type { Product } from '@/types'
+import { mockProducts } from '@/lib/firebase'
 
 export function useProducts() {
   const [products, setProducts] = useState<Product[]>([])
-  const [loading,  setLoading]  = useState(true)
-  const [error,    setError]    = useState<string | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const q = query(collection(db, 'products'), orderBy('createdAt', 'desc'))
+    const timer = setTimeout(() => {
+      setProducts(mockProducts as Product[])
+      setLoading(false)
+    }, 800)
 
-    const unsubscribe = onSnapshot(q,
-      snap => {
-        setProducts(snap.docs.map(d => ({ id: d.id, ...d.data() } as Product)))
-        setLoading(false)
-      },
-      err => {
-        setError(err.message)
-        setLoading(false)
-      }
-    )
-
-    return unsubscribe
+    return () => clearTimeout(timer)
   }, [])
 
-  return { products, loading, error }
+  return { products, loading, error: null }
 }

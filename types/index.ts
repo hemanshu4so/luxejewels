@@ -3,21 +3,21 @@ export interface Product {
   name:        string
   slug:        string
   category:    Category
-  subcategory: string
+  subcategory?: string
   images:      string[]
-  weight:      number        // grams
-  price?:      number        // optional — can be hidden
+  weight:      number
+  price?:      number
   showPrice:   boolean
   description: string
   tags:        string[]
   occasion:    Occasion[]
   material:    string
-  purity?:     string        // e.g. "22K", "92.5"
+  purity?:     string
   inStock:     boolean
   featured:    boolean
   views:       number
-  createdAt:   string
-  updatedAt:   string
+  createdAt?:  string
+  updatedAt?:  string
 }
 
 export type Category = 'gold' | 'silver' | 'diamond' | 'bridal' | 'platinum' | 'kundan' | 'polki'

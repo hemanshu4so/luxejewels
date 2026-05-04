@@ -1,0 +1,20 @@
+import type { Metadata } from 'next'
+import Header from '@/components/website/Header'
+
+export const metadata: Metadata = {
+  title: 'LuxeJewels – Premium Jewellery',
+  description: 'Luxury jewellery collections crafted with elegance.',
+}
+
+export default function WebsiteLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <>
+      <Header />
+      <main>{children}</main>
+    </>
+  )
+}
