@@ -18,7 +18,7 @@ export default function HeroSection() {
       {/* ── Parallax Background ── */}
       <motion.div style={{ y }} className="absolute inset-0 z-0">
         <Image
-          src="/images/hero-bg.jpg"
+          src="/images/placeholder.jpg"
           alt="Luxury jewellery"
           fill
           priority

@@ -1,51 +1,47 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
 
-type Product = {
-  id: string
-  name: string
-  image: string
-  price?: string
-}
-
-export default function ProductCard({ product }: { product: Product }) {
-  const [wishlisted, setWishlisted] = useState(false)
-
+export default function ProductCard({ product }: any) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition"
+      transition={{ duration: 0.4 }}
+      className="bg-white rounded-2xl shadow p-3"
     >
-      {/* Image */}
-      <div className="relative">
-        <img
-          src={product.image || '/images/placeholder.jpg'}
-          alt={product.name}
-          className="w-full h-60 object-cover"
+      <div className="relative w-full h-[250px]">
+        <Image
+          src="/images/placeholder.jpg"
+          alt="product"
+          fill
+          className="object-cover rounded-xl"
         />
-
-        {/* Wishlist Button */}
-        <button
-          onClick={() => setWishlisted(!wishlisted)}
-          className="absolute top-3 right-3 bg-white p-2 rounded-full shadow"
-        >
-          {wishlisted ? '❤️' : '🤍'}
-        </button>
       </div>
 
-      {/* Content */}
-      <div className="p-4">
-        <h3 className="text-lg font-semibold">{product.name}</h3>
+      <h3 className="mt-3 text-lg font-semibold">
+        {product?.name || "Luxury Jewellery"}
+      </h3>
 
-        {product.price && (
-          <p className="text-yellow-600 font-medium mt-1">
-            ₹ {product.price}
-          </p>
-        )}
+      <div className="flex gap-2 mt-3">
+        <Link
+          href={`/catalogue/${product?.id || "demo"}`}
+          className="flex-1 text-center bg-black text-white py-2 rounded-lg text-sm"
+        >
+          View
+        </Link>
+
+        {/* ✅ IMPORTANT FIX */}
+        <a
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 text-center bg-green-500 text-white py-2 rounded-lg text-sm"
+        >
+          Enquire
+        </a>
       </div>
     </motion.div>
   )

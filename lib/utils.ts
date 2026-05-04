@@ -1,3 +1,10 @@
+import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
 export const formatINR = (amount: number): string =>
   new Intl.NumberFormat('en-IN', {
     style:    'currency',
@@ -32,3 +39,4 @@ export const debounce = <T extends (...args: any[]) => any>(
     timer = setTimeout(() => fn(...args), ms)
   }
 }
+

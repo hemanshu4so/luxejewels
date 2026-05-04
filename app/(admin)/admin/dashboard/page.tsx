@@ -12,6 +12,7 @@ import RatesForm     from '@/components/admin/RatesForm'
 import { useAdminStats }  from '@/hooks/useAdminStats'
 import { useRates }       from '@/hooks/useRates'
 import Link               from 'next/link'
+// Removed duplicate EnquiriesPreview import - inline function used
 
 export default function AdminDashboard() {
   const { stats, loading } = useAdminStats()

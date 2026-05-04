@@ -1,1 +1,3 @@
-// TODO: implement
+export default function ContactPage() {
+  return <div className="p-10">Contact Page</div>
+}
