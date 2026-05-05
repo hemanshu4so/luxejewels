@@ -43,7 +43,7 @@ export default function WhatsAppButton() {
 
             <div className="space-y-2">
               {quickMessages.map(msg => (
-                
+                <a
                   key={msg}
                   href={`https://wa.me/${number}?text=${encodeURIComponent(msg)}`}
                   target="_blank"
