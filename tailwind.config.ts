@@ -23,9 +23,9 @@ const config: Config = {
         muted: '#6B6B6B',
       },
       fontFamily: {
+        display: ['Playfair Display', 'serif'],
         serif: ['Cormorant Garamond', 'Georgia', 'serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        display:['Playfair Display', 'serif'],
       },
       animation: {
         'ticker': 'ticker 30s linear infinite',
@@ -60,8 +60,20 @@ const config: Config = {
       boxShadow: {
         'gold': '0 0 30px rgba(230, 184, 0, 0.3)',
         'gold-lg': '0 0 60px rgba(230, 184, 0, 0.4)',
-        'glass': '0 8px 32px rgba(0, 0, 0, 0.12)',
-        'luxury': '0 25px 80px rgba(0,0,0,0.15)',
+        'gold-xl': '0 0 80px rgba(230, 184, 0, 0.5)',
+        'luxury': '0 20px 60px rgba(0,0,0,0.15), 0 10px 30px rgba(0,0,0,0.1)',
+        'card': '0 10px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.05)',
+        'glass': '0 8px 32px rgba(31, 38, 135, 0.37)',
+        'elevated': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+      },
+      transformOrigin: { 'center': 'center' },
+      dropShadow: {
+        'gold': '0 0 8px rgba(230, 184, 0, 0.6)',
+        'glow': [
+          '0 0 4px rgba(230, 184, 0, 0.4)',
+          '0 0 8px rgba(230, 184, 0, 0.3)',
+          '0 0 16px rgba(230, 184, 0, 0.2)',
+        ],
       },
     },
   },

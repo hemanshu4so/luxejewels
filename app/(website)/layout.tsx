@@ -12,9 +12,9 @@ export default function WebsiteLayout({
   children: React.ReactNode
 }) {
   return (
-    <>
+    <div className="min-h-screen bg-cream/90 gold-blur">
       <Header />
-      <main>{children}</main>
-    </>
+      <main className="pt-0">{children}</main>
+    </div>
   )
 }

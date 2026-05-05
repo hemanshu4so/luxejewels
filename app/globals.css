@@ -44,31 +44,45 @@ body {
 /* Components */
 @layer components {
   .glass {
-    @apply bg-white/10 backdrop-blur-md border border-white/20;
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
   }
   .glass-dark {
-    @apply bg-black/20 backdrop-blur-md border border-white/10;
+    @apply bg-charcoal/30 backdrop-blur-xl border border-white/5;
+  }
+  .luxury-card {
+    @apply bg-white/80 backdrop-blur-sm border border-gray-100/50 shadow-card rounded-3xl p-8 transition-all duration-500;
+  }
+  .luxury-card:hover {
+    @apply shadow-luxury -translate-y-1;
+  }
+  .luxury-button {
+    @apply bg-gradient-to-r from-gold-500 to-gold-600 text-charcoal font-display font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-gold-lg hover:scale-[1.02] hover:from-gold-400 hover:to-gold-500 transition-all duration-300 inline-flex items-center gap-2;
+  }
+  .section-container {
+    @apply max-w-7xl mx-auto px-6 py-20;
   }
   .gold-text {
-    background: linear-gradient(135deg, #e6b800 0%, #f2ca2a 40%, #c49a00 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    @apply bg-gradient-to-r from-gold-600 via-gold-400 to-gold-700 bg-clip-text text-transparent font-display tracking-wide;
   }
   .gold-shimmer {
-    background: linear-gradient(90deg,
-      #e6b800 0%, #f7e063 25%, #fdf9d3 50%, #f7e063 75%, #e6b800 100%
-    );
+    background: linear-gradient(90deg, #e6b800 0%, #f7e063 25%, #fdf9d3 50%, #f7e063 75%, #e6b800 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     animation: shimmer 3s linear infinite;
   }
-  .luxury-border {
-    border-image: linear-gradient(135deg, #e6b800, #c49a00) 1;
+  .section-title {
+    @apply font-display text-4xl md:text-5xl text-center mb-16 relative;
+  }
+  .section-title::after {
+    content: '';
+    @apply absolute left-1/2 -translate-x-1/2 bottom-0 w-24 h-1 bg-gradient-to-r from-gold-500 to-gold-300 rounded-full;
   }
   .product-card-hover {
-    @apply transition-all duration-500 hover:-translate-y-2;
+    @apply transition-all duration-500 hover:scale-105 hover:shadow-gold-xl hover:ring-4 hover:ring-gold-500/20;
+  }
+  .gold-blur {
+    background: radial-gradient(ellipse at center, rgba(230,184,0,0.1) 0%, transparent 50%);
   }
 }
