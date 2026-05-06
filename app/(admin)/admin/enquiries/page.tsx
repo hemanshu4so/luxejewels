@@ -1,6 +1,5 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import AdminLayout from '@/components/admin/AdminLayout'
 import { useEnquiries } from '@/hooks/useEnquiries'
 import { Button } from '@/components/ui/Button'
@@ -33,7 +32,7 @@ export default function AdminEnquiries() {
               <div key={enquiry.id} className="p-6 bg-white dark:bg-charcoal/60 rounded-2xl border border-gray-100">
                 <div className="flex gap-4">
                   <div className="w-12 h-12 bg-gradient-to-br from-gold-400 to-gold-600 rounded-2xl flex items-center justify-center text-white font-bold">
-                    {enquiry.name[0].toUpperCase()}
+                    {(enquiry.name?.[0] || '?').toUpperCase()}
                   </div>
                   <div className="flex-1 space-y-1">
                     <h3 className="font-semibold">{enquiry.name}</h3>
@@ -61,4 +60,3 @@ export default function AdminEnquiries() {
     </AdminLayout>
   )
 }
-

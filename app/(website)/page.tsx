@@ -1,25 +1,77 @@
-import Header from '@/components/website/Header'
+'use client'
+
+import dynamic from 'next/dynamic'
 import HeroSection from '@/components/website/HeroSection'
-import Footer from '@/components/website/Footer'
-import WhatsAppButton from '@/components/website/WhatsAppButton'
+import ProductCard from '@/components/website/ProductCard'
+import { mockProducts } from '@/lib/luxury-data'
+
+const SectionFallback = ({ dark = false }: { dark?: boolean }) => (
+  <div className={`${dark ? 'bg-[#15110f]' : 'bg-[#F8F5EF]'} py-24 sm:py-28`}>
+    <div className="section-shell">
+      <div className={`h-40 animate-pulse rounded-[8px] ${dark ? 'bg-white/[0.04]' : 'bg-[#2B1810]/[0.04]'}`} />
+    </div>
+  </div>
+)
+
+const CollectionsStorySection = dynamic(() => import('@/components/website/LuxuryStorySections').then((mod) => mod.CollectionsStorySection), {
+  loading: () => <SectionFallback />,
+})
+const HeritageTimeline = dynamic(() => import('@/components/website/LuxuryStorySections').then((mod) => mod.HeritageTimeline), {
+  loading: () => <SectionFallback dark />,
+})
+const AboutSKKLSection = dynamic(() => import('@/components/website/LuxuryStorySections').then((mod) => mod.AboutSKKLSection), {
+  loading: () => <SectionFallback />,
+})
+const TrustSection = dynamic(() => import('@/components/website/LuxuryStorySections').then((mod) => mod.TrustSection), {
+  loading: () => <SectionFallback />,
+})
+const CustomJewellerySection = dynamic(() => import('@/components/website/LuxuryStorySections').then((mod) => mod.CustomJewellerySection), {
+  loading: () => <SectionFallback dark />,
+})
+const CraftSection = dynamic(() => import('@/components/website/LuxuryStorySections').then((mod) => mod.CraftSection), {
+  loading: () => <SectionFallback dark />,
+})
+const ShowroomSection = dynamic(() => import('@/components/website/LuxuryStorySections').then((mod) => mod.ShowroomSection), {
+  loading: () => <SectionFallback />,
+})
+const PhilosophySection = dynamic(() => import('@/components/website/LuxuryStorySections').then((mod) => mod.PhilosophySection), {
+  loading: () => <SectionFallback dark />,
+})
+const FutureVisionSection = dynamic(() => import('@/components/website/LuxuryStorySections').then((mod) => mod.FutureVisionSection), {
+  loading: () => <SectionFallback />,
+})
+const FeaturedProductsSection = dynamic(() => import('@/components/website/LuxuryStorySections').then((mod) => mod.FeaturedProductsSection), {
+  loading: () => <SectionFallback />,
+})
+const TestimonialsSection = dynamic(() => import('@/components/website/LuxuryStorySections').then((mod) => mod.TestimonialsSection), {
+  loading: () => <SectionFallback dark />,
+})
+const SocialShowcaseSection = dynamic(() => import('@/components/website/LuxuryStorySections').then((mod) => mod.SocialShowcaseSection), {
+  loading: () => <SectionFallback />,
+})
 
 export default function HomePage() {
+  const featured = mockProducts.filter((product) => product.featured).slice(0, 4)
+
   return (
-    <div className="bg-[#FAF7F2] text-[#1A1A1A]">
-      <Header />
+    <div className="bg-[#F8F5EF] text-charcoal">
       <HeroSection />
-      <section className="mx-auto max-w-7xl px-6 py-20">
-        <div className="grid gap-6 md:grid-cols-3">
-          {['Master Craftsmanship', 'Certified Excellence', 'Bespoke Luxury'].map((title) => (
-            <div key={title} className="rounded-2xl border border-[#e6b800]/20 bg-white/70 p-8 shadow-sm backdrop-blur">
-              <h3 className="font-playfair text-2xl">{title}</h3>
-              <p className="mt-3 text-[#1A1A1A]/70">Curated jewellery with exceptional finishing, timeless silhouettes, and unmatched attention to detail.</p>
-            </div>
-          ))}
-        </div>
-      </section>
-      <Footer />
-      <WhatsAppButton />
+      <CollectionsStorySection />
+      <HeritageTimeline />
+      <AboutSKKLSection />
+      <TrustSection />
+      <CustomJewellerySection />
+      <CraftSection />
+      <ShowroomSection />
+      <PhilosophySection />
+      <FutureVisionSection />
+      <FeaturedProductsSection>
+        {featured.map((product, index) => (
+          <ProductCard key={product.id} product={product} index={index} />
+        ))}
+      </FeaturedProductsSection>
+      <TestimonialsSection />
+      <SocialShowcaseSection />
     </div>
   )
 }

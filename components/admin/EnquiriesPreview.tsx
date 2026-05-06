@@ -2,7 +2,9 @@
 
 import type { Enquiry } from '@/types'
 
-const mockEnquiries: Pick<Enquiry, 'id' | 'name' | 'status' | 'createdAt'> & { productName: string, time: string }[] = [
+type PreviewEnquiry = Pick<Enquiry, 'id' | 'name' | 'status' | 'createdAt'> & { productName: string; time: string }
+
+const mockEnquiries: PreviewEnquiry[] = [
   { id: '1', name: 'Priya Sharma',  productName: 'Bridal Necklace Set',    time: '2h ago',  status: 'new'    as const, createdAt: '' },
   { id: '2', name: 'Anjali Patel',  productName: 'Diamond Solitaire Ring', time: '5h ago',  status: 'read'   as const, createdAt: '' },
   { id: '3', name: 'Meera Joshi',   productName: 'Gold Bangles (Set of 6)', time: '1d ago', status: 'replied' as const, createdAt: '' },
@@ -20,7 +22,7 @@ export default function EnquiriesPreview() {
       {mockEnquiries.map(enq => (
         <div key={enq.id} className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
           <div className="w-9 h-9 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-white font-bold text-sm">
-            {enq.name[0]}
+            {enq.name[0] ?? '?'}
           </div>
           <div className="flex-1 min-w-0">
             <p className="font-medium text-sm">{enq.name}</p>
@@ -37,4 +39,3 @@ export default function EnquiriesPreview() {
     </div>
   )
 }
-

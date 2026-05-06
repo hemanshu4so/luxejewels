@@ -1,175 +1,95 @@
 'use client'
 
-import { useRef }                       from 'react'
-import Link                             from 'next/link'
-import Image                            from 'next/image'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowRight, Play }             from 'lucide-react'
+import { useRef } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { ArrowRight, Gem, Landmark } from 'lucide-react'
 
 export default function HeroSection() {
   const ref = useRef<HTMLElement>(null)
+  const reduceMotion = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  const y      = useTransform(scrollYProgress, [0, 1], ['0%',  '50%'])
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '18%'])
+  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.28])
 
   return (
-    <section ref={ref} className="relative h-screen min-h-[700px] overflow-hidden flex items-center">
-
-      {/* ── Parallax Background ── */}
-      <motion.div style={{ y }} className="absolute inset-0 z-0">
+    <section ref={ref} className="relative flex min-h-[calc(100svh-104px)] items-center overflow-hidden bg-[#0F0F0F] py-20 text-white sm:py-24 lg:py-28">
+      <motion.div style={{ y: reduceMotion ? 0 : y }} className="gpu-layer absolute inset-0">
         <Image
-          src="/images/placeholder.jpg"
-          alt="Luxury jewellery"
+          src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=2400&q=88"
+          alt="SKKL Jewellers heritage luxury jewellery closeup"
           fill
           priority
-          className="object-cover object-center scale-110"
+          quality={82}
+          className="scale-105 object-cover object-center"
           sizes="100vw"
         />
-        {/* Multi-layer overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
-        {/* Gold dust effect */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(230,184,0,0.15),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,15,15,0.94),rgba(43,24,16,0.72)_46%,rgba(15,15,15,0.18))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_42%,rgba(198,162,90,0.25),transparent_34%),radial-gradient(circle_at_72%_20%,rgba(248,245,239,0.12),transparent_22%),linear-gradient(0deg,rgba(15,15,15,0.82),transparent_44%)]" />
+        <div className="absolute inset-0 opacity-[0.09] [background-image:radial-gradient(#F8E6B1_1px,transparent_1px)] [background-size:16px_16px]" />
       </motion.div>
 
-      {/* ── Floating Jewellery Particles ── */}
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 rounded-full bg-gold-400"
-          style={{
-            left:   `${20 + i * 12}%`,
-            top:    `${30 + (i % 3) * 15}%`,
-          }}
-          animate={{
-            y:       [0, -20, 0],
-            opacity: [0.3, 0.8, 0.3],
-            scale:   [1, 1.5, 1],
-          }}
-          transition={{
-            duration: 3 + i * 0.5,
-            repeat:   Infinity,
-            delay:    i * 0.4,
-          }}
+      {!reduceMotion && [...Array(10)].map((_, index) => (
+        <motion.span
+          key={index}
+          className="gpu-layer absolute hidden h-1 w-1 rounded-full bg-[#e9d08b] sm:block"
+          style={{ left: `${12 + index * 7}%`, top: `${18 + (index % 5) * 13}%` }}
+          animate={{ y: [0, -16, 0], opacity: [0.16, 0.72, 0.16], scale: [1, 1.45, 1] }}
+          transition={{ duration: 5.6 + index * 0.22, repeat: Infinity, delay: index * 0.23, ease: 'easeInOut' }}
         />
       ))}
 
-      {/* ── Content ── */}
-      <motion.div
-        style={{ opacity }}
-        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full"
-      >
+      <motion.div style={{ opacity }} className="section-shell relative z-10">
         <div className="max-w-3xl">
-
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-6"
-          >
-            <div className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse" />
-            <span className="text-gold-300 text-xs tracking-[0.3em] uppercase font-medium">
-              New Collection 2025
-            </span>
+          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="mb-7 inline-flex items-center gap-3 rounded-full border border-white/18 bg-white/8 px-4 py-2 backdrop-blur-md">
+            <Gem size={15} className="text-[#e9d08b]" />
+            <span className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#f8e6b1]">The Magnificent Indian Jeweller Since 1951</span>
           </motion.div>
 
-          {/* Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="font-display text-5xl sm:text-6xl lg:text-8xl font-bold text-white leading-[1.05] mb-6"
-          >
-            Where{' '}
-            <span className="gold-shimmer">Elegance</span>
-            <br />
-            <em className="font-light">Meets Eternity</em>
+          <motion.h1 initial={{ opacity: 0, y: 34 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.14, duration: 1, ease: 'easeOut' }} className="font-display text-5xl font-semibold leading-[0.98] tracking-normal text-white sm:text-7xl lg:text-8xl xl:text-[6.7rem]">
+            Where Heritage Meets Modern Luxury
+            <span className="mt-5 block font-serif text-3xl font-light italic text-[#e7cf8e] sm:text-5xl lg:text-6xl">SKKL Jewellers</span>
           </motion.h1>
 
-          {/* Subtext */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-white/70 text-lg sm:text-xl font-light leading-relaxed mb-10 max-w-xl"
-          >
-            Handcrafted with generations of artistry. Each piece tells a story
-            of love, heritage, and extraordinary craftsmanship.
+          <motion.p initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.32, duration: 0.9 }} className="mt-7 max-w-2xl text-lg leading-8 text-white/72 sm:text-xl sm:leading-9">
+            For over seven decades, SKKL Jewellers has blended heritage craftsmanship, purity, trust, and modern elegance into jewellery that becomes part of family memories.
           </motion.p>
 
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="flex flex-wrap gap-4"
-          >
-            <Link
-              href="/catalogue"
-              className="
-                group flex items-center gap-2 px-8 py-4
-                bg-gradient-to-r from-gold-500 to-gold-600
-                text-white font-semibold rounded-full
-                hover:shadow-gold-lg hover:scale-105
-                transition-all duration-300 text-sm tracking-wide
-              "
-            >
-              Explore Collections
-              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.48, duration: 0.7 }} className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <Link href="/catalogue" className="gold-button">
+              Explore Collection
+              <ArrowRight size={16} />
             </Link>
-
-            <button className="
-              group flex items-center gap-3 px-8 py-4
-              glass text-white font-medium rounded-full
-              hover:bg-white/20 transition-all duration-300
-              text-sm tracking-wide
-            ">
-              <span className="
-                w-8 h-8 rounded-full bg-white/20 flex items-center justify-center
-                group-hover:bg-gold-500 transition-colors duration-300
-              ">
-                <Play size={12} className="ml-0.5" fill="currentColor" />
-              </span>
-              Our Story
-            </button>
+            <Link href="#heritage" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/24 bg-white/8 px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white backdrop-blur transition hover:bg-white hover:text-charcoal">
+              Discover Heritage
+            </Link>
           </motion.div>
 
-          {/* Trust Badges */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2 }}
-            className="flex items-center gap-6 mt-12"
-          >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 0.8 }} className="mt-14 grid max-w-2xl grid-cols-2 gap-4 sm:grid-cols-4">
             {[
-              { num: '35+', label: 'Years Heritage' },
-              { num: '50K+', label: 'Happy Families' },
-              { num: 'BIS', label: 'Hallmarked' },
-              { num: 'IGI', label: 'Certified Diamonds' },
-            ].map((badge, i) => (
-              <div key={i} className="text-center">
-                <div className="text-gold-400 font-display text-xl font-bold">{badge.num}</div>
-                <div className="text-white/50 text-[10px] tracking-widest uppercase">{badge.label}</div>
+              ['70+', 'Years of trust'],
+              ['BIS', 'Hallmarked gold'],
+              ['1951', 'Shapur roots'],
+              ['1:1', 'Custom consults'],
+            ].map(([value, label]) => (
+              <div key={label} className="border-l border-[#e7cf8e]/35 pl-4">
+                <p className="font-display text-2xl text-[#e7cf8e]">{value}</p>
+                <p className="mt-1 text-[10px] uppercase tracking-[0.22em] text-white/48">{label}</p>
               </div>
             ))}
           </motion.div>
         </div>
-      </motion.div>
 
-      {/* ── Scroll Indicator ── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
-      >
-        <span className="text-white/40 text-[10px] tracking-[0.3em] uppercase">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-[1px] h-12 bg-gradient-to-b from-gold-400 to-transparent"
-        />
+        <motion.div initial={{ opacity: 0, x: 28 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.65, duration: 0.8 }} className="absolute bottom-0 right-8 hidden max-w-xs rounded-[8px] border border-white/14 bg-black/22 p-5 backdrop-blur-xl lg:block">
+          <div className="flex items-start gap-3">
+            <Landmark className="mt-1 text-[#e7cf8e]" size={22} />
+            <div>
+              <p className="font-display text-xl">Soni Karshanji Kurji Lodhiya</p>
+              <p className="mt-2 text-sm leading-6 text-white/60">A Shapur jewellery house where family trust, craft, and transparency remain the real luxury.</p>
+            </div>
+          </div>
+        </motion.div>
       </motion.div>
     </section>
   )

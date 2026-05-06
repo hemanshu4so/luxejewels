@@ -1,15 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --gold-primary: #e6b800;
-  --gold-light:   #f2ca2a;
-  --gold-dark:    #c49a00;
-  --cream:        #FAF7F2;
+  --gold-primary: #C6A25A;
+  --gold-light:   #E8CF94;
+  --gold-dark:    #9D7731;
+  --cream:        #F8F5EF;
   --charcoal:     #1A1A1A;
+  --ivory:        #fffaf0;
+  --champagne:    #C6A25A;
 }
 
 * {
@@ -18,13 +18,20 @@
 
 html {
   scroll-behavior: smooth;
+  text-size-adjust: 100%;
 }
 
 body {
   background-color: var(--cream);
   color: var(--charcoal);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), sans-serif;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(216, 183, 106, 0.35);
 }
 
 /* Scrollbar */
@@ -50,7 +57,7 @@ body {
     @apply bg-black/20 backdrop-blur-md border border-white/10;
   }
   .gold-text {
-    background: linear-gradient(135deg, #e6b800 0%, #f2ca2a 40%, #c49a00 100%);
+    background: linear-gradient(135deg, #9d7731 0%, #C6A25A 38%, #fff0b8 55%, #8f6428 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -65,10 +72,46 @@ body {
     background-clip: text;
     animation: shimmer 3s linear infinite;
   }
+  .luxury-section {
+    @apply relative overflow-hidden bg-[#F8F5EF] text-charcoal;
+  }
+  .section-shell {
+    @apply mx-auto w-full max-w-[1440px] px-6 sm:px-8 lg:px-10 xl:px-12;
+  }
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.32em] text-gold-700;
+  }
+  .luxury-button {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-charcoal px-7 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-cream transition duration-500 hover:bg-black hover:shadow-[0_18px_40px_rgba(26,26,26,0.2)];
+  }
+  .gold-button {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#9D7731] via-[#E8CF94] to-[#C6A25A] px-7 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-charcoal shadow-[0_16px_34px_rgba(198,162,90,0.28)] transition duration-500 hover:shadow-[0_20px_46px_rgba(198,162,90,0.38)];
+  }
+  .cinematic-section {
+    @apply py-24 sm:py-28 lg:py-32;
+  }
+  .luxury-copy {
+    @apply text-base leading-8 sm:text-lg sm:leading-9;
+  }
+  .gpu-layer {
+    transform: translateZ(0);
+    will-change: transform, opacity;
+  }
   .luxury-border {
     border-image: linear-gradient(135deg, #e6b800, #c49a00) 1;
   }
   .product-card-hover {
     @apply transition-all duration-500 hover:-translate-y-2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
   }
 }

@@ -1,39 +1,77 @@
+'use client'
+
 import Image from 'next/image'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { ArrowRight, Gem, HandHeart, ShieldCheck } from 'lucide-react'
 
 const milestones = [
-  { year: '1987', text: 'LuxeJewels founded with a vision for timeless craftsmanship.' },
-  { year: '2002', text: 'Expanded into bridal heirloom collections with custom atelier services.' },
-  { year: '2018', text: 'Introduced contemporary diamond lines for modern celebrations.' },
-  { year: '2026', text: 'Continuing our legacy with sustainable sourcing and fine artistry.' },
+  { year: '1951', title: 'The first promise', text: 'Late Shri Karshanji Bhai Lodhiya begins jewellery craftsmanship in Shapur with limited resources, handmade skill, and transparent trust.' },
+  { year: 'Early years', title: 'Karigar discipline', text: 'Traditional desi diya flame work, tube light hours, and hand-finished detailing shape the SKKL way of working.' },
+  { year: 'Today', title: 'Modern standards', text: 'Hardik Lodhiya carries the house forward with custom design, clearer consultation, and a premium showroom experience.' },
+  { year: '2026', title: 'Digital heritage', text: 'The SKKL experience expands into a cinematic online salon for discovery, enquiry, and appointment booking.' },
 ]
 
 export default function AboutPage() {
   return (
-    <main className="bg-[#FAF7F2] py-20">
-      <section className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2 lg:items-center">
+    <div className="bg-[#fbf6ec] text-charcoal">
+      <section className="section-shell grid gap-12 py-20 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div>
-          <p className="text-xs uppercase tracking-[0.35em] text-[#c49a00]">Our Heritage</p>
-          <h1 className="mt-4 font-playfair text-4xl text-[#1A1A1A] sm:text-5xl">A Legacy of Craft, Passed Through Generations</h1>
-          <p className="mt-6 text-lg leading-relaxed text-[#1A1A1A]/75">For nearly four decades, we have crafted jewellery that marks life&apos;s most precious moments, blending heritage techniques with contemporary elegance.</p>
+          <p className="eyebrow">Our heritage</p>
+          <h1 className="mt-4 font-display text-5xl leading-tight sm:text-7xl">A legacy of craft, passed through generations.</h1>
+          <p className="mt-6 text-lg leading-8 text-charcoal/64">
+            SKKL Jewellers is built on a simple luxury promise: purity you can trust, craft you can feel, and jewellery that becomes part of a family history.
+          </p>
+          <Link href="/contact#appointment" className="gold-button mt-8 w-fit">Book a private visit <ArrowRight size={16} /></Link>
         </div>
-        <div className="relative h-[440px] overflow-hidden rounded-2xl shadow-[0_20px_50px_rgba(26,26,26,0.16)]">
-          <Image src="/images/placeholder.jpg" alt="LuxeJewels heritage" fill className="object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+        <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} className="relative aspect-[4/5] overflow-hidden rounded-[8px] shadow-[0_30px_86px_rgba(26,26,26,0.14)]">
+          <Image src="https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?auto=format&fit=crop&w=1700&q=85" alt="SKKL heritage jewellery craft" fill priority className="object-cover" sizes="(min-width: 1024px) 50vw, 100vw" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/56 via-transparent to-transparent" />
+          <div className="absolute bottom-6 left-6 right-6 rounded-[8px] border border-white/18 bg-black/22 p-5 text-white backdrop-blur">
+            <p className="text-[10px] uppercase tracking-[0.26em] text-[#e7cf8e]">House belief</p>
+            <p className="mt-2 font-serif text-2xl">Jewellery should outlive trends and still feel intimate.</p>
+          </div>
+        </motion.div>
+      </section>
+
+      <section className="bg-[#15120f] py-20 text-white">
+        <div className="section-shell">
+          <div className="max-w-3xl">
+            <p className="eyebrow text-[#e7cf8e]">Generations</p>
+            <h2 className="mt-4 font-display text-4xl leading-tight sm:text-6xl">From counter trust to couture-level bridal craft.</h2>
+          </div>
+          <div className="mt-12 grid gap-5 border-l border-[#e7cf8e]/24 pl-7">
+            {milestones.map((milestone, index) => (
+              <motion.div key={milestone.year} initial={{ opacity: 0, x: 22 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.08 }} className="relative rounded-[8px] border border-white/10 bg-white/5 p-6">
+                <span className="absolute -left-[37px] top-7 h-4 w-4 rounded-full bg-[#e7cf8e]" />
+                <div className="grid gap-4 md:grid-cols-[120px_1fr]">
+                  <p className="font-display text-4xl text-[#e7cf8e]">{milestone.year}</p>
+                  <div>
+                    <h3 className="font-display text-3xl">{milestone.title}</h3>
+                    <p className="mt-2 leading-7 text-white/62">{milestone.text}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto mt-16 max-w-7xl px-6">
-        <h2 className="font-playfair text-3xl text-[#1A1A1A]">Our Timeline</h2>
-        <div className="mt-8 space-y-6 border-l border-[#c49a00]/40 pl-8">
-          {milestones.map((milestone) => (
-            <div key={milestone.year} className="relative rounded-xl bg-white/70 p-6 shadow-sm">
-              <span className="absolute -left-[41px] top-7 h-4 w-4 rounded-full bg-gradient-to-r from-[#e6b800] to-[#c49a00]" />
-              <p className="font-playfair text-2xl text-[#1A1A1A]">{milestone.year}</p>
-              <p className="mt-2 text-[#1A1A1A]/75">{milestone.text}</p>
+      <section className="section-shell py-20">
+        <div className="grid gap-6 md:grid-cols-3">
+          {[
+            { icon: ShieldCheck, title: 'Purity first', text: 'BIS hallmarked gold, documented diamonds, and transparent rate conversations.' },
+            { icon: Gem, title: 'Material intelligence', text: 'Gold, platinum, polki, kundan, emeralds, pearls, and diamonds selected for lasting beauty.' },
+            { icon: HandHeart, title: 'Human luxury', text: 'Private consultations that respect family context, budget, ceremony, and styling needs.' },
+          ].map(({ icon: Icon, title, text }) => (
+            <div key={title} className="rounded-[8px] border border-gold-700/16 bg-white/66 p-7 shadow-sm">
+              <Icon size={28} className="text-gold-800" />
+              <h3 className="mt-6 font-display text-3xl">{title}</h3>
+              <p className="mt-3 leading-7 text-charcoal/62">{text}</p>
             </div>
           ))}
         </div>
       </section>
-    </main>
+    </div>
   )
 }

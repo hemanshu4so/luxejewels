@@ -19,14 +19,14 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title:       { default: 'LuxeJewels — Where Elegance Meets Eternity', template: '%s | LuxeJewels' },
-  description: 'Premium handcrafted jewellery — gold, diamond, bridal collections. Shop timeless elegance.',
-  keywords:    ['jewellery', 'gold', 'diamond', 'bridal', 'luxury', 'handcrafted'],
+  title:       { default: 'SKKL Jewellers - Heritage Luxury Jewellery', template: '%s | SKKL Jewellers' },
+  description: 'SKKL Jewellers is a heritage luxury jewellery house for bridal heirlooms, diamond jewellery, gold collections, bespoke design, and live precious metal rates.',
+  keywords:    ['SKKL Jewellers', 'jewellery', 'gold', 'diamond', 'bridal', 'luxury', 'bespoke jewellery'],
   openGraph: {
     type:   'website',
     locale: 'en_IN',
-    url:    'https://luxejewels.com',
-    siteName: 'LuxeJewels',
+    url:    'https://skkljewellers.com',
+    siteName: 'SKKL Jewellers',
   },
 }
 

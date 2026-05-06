@@ -1,156 +1,114 @@
 'use client'
 
-import { useState, useEffect }                from 'react'
-import Link                                    from 'next/link'
-import { usePathname }                         from 'next/navigation'
-import { motion, AnimatePresence }             from 'framer-motion'
-import { Menu, X, Heart, Search, Sun, Moon }   from 'lucide-react'
-import { useRates }                            from '@/hooks/useRates'
-import { useWishlist }                         from '@/hooks/useWishlist'
-import { useTheme }                            from 'next-themes'
-import RatesTicker                             from './RatesTicker'
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Calendar, Heart, Menu, Search, X } from 'lucide-react'
+import { useRates } from '@/hooks/useRates'
+import { useWishlist } from '@/hooks/useWishlist'
+import RatesTicker from './RatesTicker'
 
 const navLinks = [
-  { href: '/',          label: 'Home'            },
-  { href: '/about',     label: 'Our Story'       },
-  { href: '/catalogue', label: 'Collections'     },
-  { href: '/custom',    label: 'Bespoke'         },
-  { href: '/rates',     label: "Today's Rates"   },
-  { href: '/contact',   label: 'Visit Us'        },
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'Heritage' },
+  { href: '/catalogue', label: 'Collections' },
+  { href: '/custom', label: 'Atelier' },
+  { href: '/rates', label: 'Rates' },
+  { href: '/contact', label: 'Showroom' },
 ]
 
 export default function Header() {
-  const [scrolled,    setScrolled]    = useState(false)
-  const [menuOpen,    setMenuOpen]    = useState(false)
-  const [searchOpen,  setSearchOpen]  = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const pathname = usePathname()
-  const { rates }   = useRates()
-  const { count }   = useWishlist()
-  const { theme, setTheme } = useTheme()
+  const { rates } = useRates()
+  const { count } = useWishlist()
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handler)
+    handler()
+    window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
   return (
     <>
-      {/* ── Gold Ticker Bar ── */}
-      <div className="bg-charcoal text-gold-400 text-xs py-1.5 overflow-hidden">
+      <div className="bg-[#11100e] py-1.5 text-xs text-gold-400">
         <RatesTicker rates={rates} />
       </div>
 
-      {/* ── Main Header ── */}
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        className={`
-          sticky top-0 z-50 transition-all duration-500
-          ${scrolled
-            ? 'bg-white/90 dark:bg-charcoal/90 backdrop-blur-xl shadow-lg shadow-black/5 py-3'
-            : 'bg-transparent py-5'
-          }
-        `}
+        transition={{ duration: 0.55, ease: 'easeOut' }}
+        className={`sticky top-0 z-50 transition-all duration-500 ${
+          scrolled
+            ? 'border-b border-[#C6A25A]/18 bg-[#fffaf0]/92 py-3 shadow-[0_14px_40px_rgba(17,16,14,0.08)] backdrop-blur-xl'
+            : 'border-b border-transparent bg-[#fbf6ec]/80 py-5 backdrop-blur-md sm:py-6'
+        }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-
-            {/* ── Logo ── */}
-            <Link href="/" className="flex flex-col items-start group">
-              <span className="font-display text-2xl font-bold gold-text tracking-widest uppercase">
-                LuxeJewels
-              </span>
-              <span className="text-[9px] tracking-[0.4em] text-muted uppercase font-light">
-                Est. 1987 · Crafted with Love
-              </span>
+        <div className="section-shell">
+          <div className="flex items-center justify-between gap-4">
+            <Link href="/" className="flex shrink-0 flex-col items-start">
+              <span className="font-display text-2xl font-semibold uppercase tracking-[0.16em] text-[#15120d]">SKKL</span>
+              <span className="text-[9px] font-medium uppercase tracking-[0.34em] text-gold-700">Jewellers - Est. 1951</span>
             </Link>
 
-            {/* ── Desktop Nav ── */}
-            <nav className="hidden lg:flex items-center gap-8">
-              {navLinks.map(link => (
+            <nav className="hidden items-center gap-9 xl:gap-11 lg:flex">
+              {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`
-                    relative text-sm font-medium tracking-wide transition-colors duration-300
-                    after:absolute after:bottom-[-4px] after:left-0 after:h-[1px]
-                    after:bg-gradient-to-r after:from-gold-400 after:to-gold-600
-                    after:transition-all after:duration-300
-                    ${pathname === link.href
-                      ? 'text-gold-600 after:w-full'
-                      : 'text-charcoal dark:text-cream hover:text-gold-600 after:w-0 hover:after:w-full'
-                    }
-                  `}
+                  className={`relative py-2 text-sm font-medium tracking-wide transition-colors duration-500 after:absolute after:bottom-0 after:left-0 after:h-px after:bg-gradient-to-r after:from-gold-400 after:to-gold-700 after:transition-all after:duration-500 ${
+                    pathname === link.href
+                      ? 'text-gold-700 after:w-full'
+                      : 'text-charcoal/72 after:w-0 hover:text-gold-700 hover:after:w-full'
+                  }`}
                 >
                   {link.label}
                 </Link>
               ))}
             </nav>
 
-            {/* ── Action Icons ── */}
-            <div className="flex items-center gap-4">
-              {/* Search */}
-              <button
-                onClick={() => setSearchOpen(true)}
-                className="p-2 hover:text-gold-600 transition-colors"
-                aria-label="Search"
-              >
+            <div className="flex items-center gap-2 sm:gap-4">
+              <button onClick={() => setSearchOpen(true)} className="rounded-full p-2.5 transition duration-500 hover:bg-black/5 hover:text-gold-700" aria-label="Search">
                 <Search size={18} />
               </button>
 
-              {/* Wishlist */}
-              <Link href="/wishlist" className="relative p-2 hover:text-gold-600 transition-colors">
+              <Link href="/wishlist" className="relative rounded-full p-2.5 transition duration-500 hover:bg-black/5 hover:text-gold-700">
                 <Heart size={18} />
                 {count > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-gold-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold">
+                  <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-gold-600 text-[10px] font-bold text-white">
                     {count}
                   </span>
                 )}
               </Link>
 
-              {/* Theme Toggle */}
-              <button
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className="p-2 hover:text-gold-600 transition-colors"
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-              </button>
+              <Link href="/contact#appointment" className="hidden min-h-10 items-center gap-2 rounded-full border border-charcoal/15 px-5 py-2 text-xs font-semibold uppercase tracking-[0.18em] transition duration-500 hover:border-gold-600 hover:bg-white/60 hover:text-gold-700 sm:inline-flex">
+                <Calendar size={15} />
+                Visit
+              </Link>
 
-              {/* Mobile Menu Toggle */}
-              <button
-                onClick={() => setMenuOpen(!menuOpen)}
-                className="lg:hidden p-2 hover:text-gold-600 transition-colors"
-                aria-label="Menu"
-              >
+              <button onClick={() => setMenuOpen((open) => !open)} className="rounded-full p-2.5 transition duration-500 hover:bg-black/5 hover:text-gold-700 lg:hidden" aria-label="Menu">
                 {menuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
           </div>
         </div>
 
-        {/* ── Mobile Menu ── */}
         <AnimatePresence>
           {menuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden bg-white/95 dark:bg-charcoal/95 backdrop-blur-xl border-t border-gold-200/30"
-            >
-              <nav className="flex flex-col py-4 px-6 gap-4">
-                {navLinks.map(link => (
+            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.35, ease: 'easeOut' }} className="border-t border-gold-200/30 bg-[#fffaf0]/96 backdrop-blur-xl lg:hidden">
+              <nav className="flex flex-col gap-3 px-6 py-5">
+                {navLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className={`
-                      py-2 text-base font-medium border-b border-gold-100/30
-                      ${pathname === link.href ? 'text-gold-600' : 'text-charcoal dark:text-cream'}
-                    `}
+                    className={`rounded-[8px] border border-gold-100/40 px-4 py-3 text-base font-medium transition ${pathname === link.href ? 'bg-gold-50 text-gold-700' : 'text-charcoal hover:bg-white/70'}`}
                   >
                     {link.label}
                   </Link>
@@ -161,47 +119,32 @@ export default function Header() {
         </AnimatePresence>
       </motion.header>
 
-      {/* ── Search Overlay ── */}
       <AnimatePresence>
         {searchOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-start justify-center pt-24"
-            onClick={() => setSearchOpen(false)}
-          >
-            <motion.div
-              initial={{ y: -30, opacity: 0 }}
-              animate={{ y: 0,   opacity: 1 }}
-              exit={{ y: -30, opacity: 0 }}
-              className="glass bg-white dark:bg-charcoal rounded-2xl p-6 w-full max-w-2xl mx-4 shadow-luxury"
-              onClick={e => e.stopPropagation()}
-            >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-start justify-center bg-black/60 pt-24 backdrop-blur-sm" onClick={() => setSearchOpen(false)}>
+            <motion.div initial={{ y: -30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -30, opacity: 0 }} className="mx-4 w-full max-w-2xl rounded-2xl border border-white/60 bg-[#fffaf0] p-6 shadow-luxury" onClick={(event) => event.stopPropagation()}>
               <div className="flex items-center gap-3">
-                <Search className="text-gold-500" size={22} />
+                <Search className="text-gold-600" size={22} />
                 <input
                   autoFocus
                   type="text"
                   value={searchQuery}
-                  onChange={e => setSearchQuery(e.target.value)}
-                  placeholder="Search rings, necklaces, bridal sets..."
-                  className="w-full bg-transparent text-lg outline-none font-serif placeholder:text-muted/60"
-                  onKeyDown={e => {
-                    if (e.key === 'Enter') {
-                      window.location.href = `/catalogue?search=${searchQuery}`
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  placeholder="Search bridal polki, solitaire rings, temple gold..."
+                  className="w-full bg-transparent font-serif text-lg outline-none placeholder:text-muted/60"
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' && searchQuery.trim()) {
+                      window.location.href = `/catalogue?search=${encodeURIComponent(searchQuery.trim())}`
                       setSearchOpen(false)
                     }
-                    if (e.key === 'Escape') setSearchOpen(false)
+                    if (event.key === 'Escape') setSearchOpen(false)
                   }}
                 />
-                <button onClick={() => setSearchOpen(false)}>
-                  <X size={20} className="text-muted hover:text-charcoal transition-colors" />
+                <button onClick={() => setSearchOpen(false)} aria-label="Close search">
+                  <X size={20} className="text-muted transition-colors hover:text-charcoal" />
                 </button>
               </div>
-              <p className="text-xs text-muted mt-3 pl-8">
-                Press <kbd className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-white/10 text-[10px] font-mono">Enter</kbd> to search
-              </p>
+              <p className="mt-3 pl-8 text-xs text-muted">Press Enter to search the SKKL catalogue.</p>
             </motion.div>
           </motion.div>
         )}

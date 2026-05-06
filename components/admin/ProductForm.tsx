@@ -18,10 +18,10 @@ const COMMON_TAGS  = ['ring','necklace','earrings','bracelet','bangle','pendant'
 
 interface Props {
   product?: Product
-  mode:     'create' | 'edit'
+  mode?:    'create' | 'edit'
 }
 
-export default function ProductForm({ product, mode }: Props) {
+export default function ProductForm({ product, mode = 'create' }: Props) {
   const router = useRouter()
   const [saving,  setSaving]  = useState(false)
   const [success, setSuccess] = useState(false)

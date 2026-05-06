@@ -20,9 +20,9 @@ export const generateSlug = (name: string): string =>
     .trim()
 
 export const getWhatsAppLink = (product: { name: string, id: string }): string => {
-  const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919999999999'
+  const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919876543210'
   const text   = encodeURIComponent(
-    `Hello! I'm interested in *${product.name}* from LuxeJewels.\n\nProduct ID: ${product.id}\n\nCould you please share more details?`
+    `Hello! I'm interested in *${product.name}* from SKKL Jewellers.\n\nProduct ID: ${product.id}\n\nCould you please share more details?`
   )
   return `https://wa.me/${number}?text=${text}`
 }
@@ -39,4 +39,3 @@ export const debounce = <T extends (...args: any[]) => any>(
     timer = setTimeout(() => fn(...args), ms)
   }
 }
-

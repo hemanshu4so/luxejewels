@@ -9,7 +9,6 @@ export const supabase = createClient(supabaseUrl, supabaseKey, {
   auth: {
     persistSession: false,
   },
-  cookies: {}
 })
 
 export const supabaseAdmin = createClient(
@@ -39,4 +38,3 @@ export async function deleteImage(path: string, bucket = 'product-images') {
   const { error } = await supabase.storage.from(bucket).remove([path])
   if (error) throw error
 }
-

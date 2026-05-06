@@ -1,8 +1,9 @@
-import { initializeApp, getApps } from 'firebase/app'
+import { getAnalytics, isSupported } from 'firebase/analytics'
+import { getApp, getApps, initializeApp } from 'firebase/app'
+import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 import { getStorage } from 'firebase/storage'
-import { getAuth } from 'firebase/auth'
-import { getAnalytics, isSupported } from 'firebase/analytics'
+export { mockProducts, mockRates } from './luxury-data'
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -14,7 +15,7 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 }
 
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0]
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp()
 
 export const db = getFirestore(app)
 export const storage = getStorage(app)
