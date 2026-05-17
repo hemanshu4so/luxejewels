@@ -18,7 +18,7 @@ export default function ContactPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_26%_20%,rgba(216,183,106,0.18),transparent_32%)]" />
         <div className="section-shell relative">
           <p className="eyebrow text-[#e7cf8e]">Visit showroom</p>
-          <h1 className="mt-4 max-w-4xl font-display text-5xl leading-tight sm:text-7xl">A private jewellery salon for life&apos;s defining moments.</h1>
+          <h1 className="mt-4 max-w-4xl font-display text-5xl leading-tight sm:text-7xl">A private jewellery Store for life&apos;s defining moments.</h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-white/64">Book bridal styling, bespoke design, rate guidance, repair review, or a quiet catalogue viewing with SKKL consultants.</p>
         </div>
       </section>

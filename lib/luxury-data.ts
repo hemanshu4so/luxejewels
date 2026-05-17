@@ -1,13 +1,13 @@
 import type { MetalRates, Product } from '@/types'
 
-export const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919876543210'
+export const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '918849775545'
 
 export const showroom = {
   name: 'SKKL Jewellers Heritage Salon',
-  phone: '+91 98765 43210',
+  phone: '+91 97221 88559',
   email: 'concierge@skkljewellers.com',
   address: 'Shapur, Gujarat, India',
-  hours: '10:30 AM - 8:30 PM, all days',
+  hours: '09:30 AM - 8:00 PM, Sunday Closed',
   mapUrl: 'https://maps.google.com/?q=SKKL%20Jewellers%20Shapur%20Gujarat',
 }
 
